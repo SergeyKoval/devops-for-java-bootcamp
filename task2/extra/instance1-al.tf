@@ -85,7 +85,12 @@ data "aws_ami" "amazon-linux-2023" {
 
   filter {
     name   = "name"
-    values = ["task2-instance1-image"]
+    values = ["al2023-ami-2023*"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
   }
 }
 
@@ -95,6 +100,8 @@ resource "aws_instance" "task2-instance1-al" {
   subnet_id     = aws_subnet.task2-private.id
   key_name      = "task1-instance1-key"
   vpc_security_group_ids = [aws_security_group.task2-instance1-sg-private.id]
+  user_data_replace_on_change = true
+  user_data = file("${path.module}/instance1-user-data.yml")
   tags = {
     Name = "task2-instance1-al"
     task = "task2"
