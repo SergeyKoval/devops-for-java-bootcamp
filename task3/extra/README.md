@@ -1,4 +1,4 @@
-# Task 3 mandatory part
+# Task 3 extra part
 
 ## Requirements
 - Write bash script for installing Docker.
