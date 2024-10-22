@@ -135,7 +135,7 @@ Environment file:
 DB_NAME=task3
 DB_USER=postgres
 DB_PASSWORD=password
-DEVOPS: "Sergey Koval override value by environment file"
+DEVOPS='Sergey Koval override value by environment file'
 ```
 
 Updated docker compose script:
