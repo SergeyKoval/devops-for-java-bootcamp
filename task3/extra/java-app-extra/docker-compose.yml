@@ -11,7 +11,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DEVOPS: "Sergey Koval override value by compose"
+      DEVOPS: ${DEVOPS}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
     depends_on:
       - postgresql
   postgresql:
@@ -20,9 +23,9 @@ services:
       - "postgresql-data:/var/lib/postgresql/data/"
       - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - POSTGRES_DB=task3
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "5432:5432"
 volumes:
