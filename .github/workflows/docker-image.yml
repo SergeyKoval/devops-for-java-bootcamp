@@ -1,0 +1,18 @@
+name: Build image and push it to DockerHub
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build ./task3/extra/java-app-extra/ --file Dockerfile --tag deplake/devops-for-java-bootcamp-task3-extra:latest
+    - name: Push image to docker hub
+      run: |
+        docker login -u deplake -p ${{secrets.DEPLAKE_DOCKER_HUB_TOKEN}}
+        docker push deplake/devops-for-java-bootcamp-task3-extra:latest
