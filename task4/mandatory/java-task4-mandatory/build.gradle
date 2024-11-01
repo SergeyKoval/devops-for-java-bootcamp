@@ -1,6 +1,8 @@
 plugins {
 	id 'org.springframework.boot' version '3.3.0'
 	id 'java'
+	id 'checkstyle'
+	id 'com.github.spotbugs' version '6.0.25'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -20,4 +22,28 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+checkstyle {
+	toolVersion = "10.17.0"
+}
+
+checkstyleMain
+	.exclude('com/example/springboot/Application.java')
+	.exclude('com/example/springboot/AppController.java')
+
+def classLoader = plugins['com.github.spotbugs'].class.classLoader
+def SpotBugsEffort = classLoader.findLoadedClass( 'com.github.spotbugs.snom.Effort' )
+def SpotBugsConfidence = classLoader.findLoadedClass( 'com.github.spotbugs.snom.Confidence' )
+spotbugs {
+	toolVersion = "4.8.6"
+	effort = SpotBugsEffort.MAX
+	reportLevel = SpotBugsConfidence.LOW
+}
+
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
+	reports {
+		xml.required.set(false)  // For XML reports
+		html.required.set(true) // For HTML reports
+	}
 }
