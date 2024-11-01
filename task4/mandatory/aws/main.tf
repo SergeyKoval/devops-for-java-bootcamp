@@ -110,7 +110,7 @@ resource "aws_vpc_security_group_egress_rule" "task4-instance1-sge-rule1" {
 
 resource "aws_instance" "task4-instance1" {
   ami                         = "ami-0866a3c8686eaeeba"
-  instance_type               = "t3.small"
+  instance_type               = "t3a.medium"
   subnet_id                   = aws_subnet.task4-public.id
   key_name                    = "task1-instance1-key"
   vpc_security_group_ids      = [aws_security_group.task4-instance1-sg-public.id]
