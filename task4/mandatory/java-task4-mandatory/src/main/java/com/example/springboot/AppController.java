@@ -16,7 +16,7 @@ public class AppController {
 
   @GetMapping("/endpoint1")
   public String endpoint1() {
-    return "Endpoint 1!";
+    return "Endpoint 1!!";
   }
 
   @GetMapping("/hello")
