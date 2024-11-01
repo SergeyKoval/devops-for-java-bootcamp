@@ -103,3 +103,54 @@ dependencyCheck {
 
 ### main branch with success build
 
+![](/task4/mandatory/images/jenkins_main_success.png)
+
+### checkstyle branch with failed build
+
+![](/task4/mandatory/images/jenkins_ckeckstyle_fail.png)
+
+### spotbugs branch with failed build
+
+![](/task4/mandatory/images/jenkins_spotbug_fails1.png)
+![](/task4/mandatory/images/jenkins_spotbug_fails2.png)
+
+### dependency-check branch with failed build
+
+![](/task4/mandatory/images/jenkins_dependency_fails1.png)
+![](/task4/mandatory/images/jenkins_dependency_fails2.png)
+
+## Github action linter
+
+Github action linter script:
+
+```yml
+name: Lint Code Base
+
+on:
+  pull_request:
+    branches: [ "protected" ]
+jobs:
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: "main"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Protect branch configuration:
+
+![](/task4/mandatory/images/github_pretect_branch_configuration.png)
+
+Pull request with failed check
+
+![](/task4/mandatory/images/github_failed_check.png)
