@@ -1,4 +1,4 @@
-# Task 4 mandatory part
+# Task 4 extra part
 
 ## Requirements
 - Configure integration between Jenkins and your Git repo. Jenkins project must be started automatically if you push or merge to master, you also must see Jenkins last build status(success/unsuccess) in your Git repo.
@@ -8,6 +8,30 @@
 ![](/task4/extra/images/requirement.png)
 
 ## Jenkins integration with github
+
+Github token was created for jenkins in order to have permissions for updating status. This token was added to the jenkins configuration (github server)
+
+![](/task4/extra/images/jenkins_github-server.png)
+
+Then webhook ig github was created in order to trigger jenkins builds
+
+![](/task4/extra/images/github_webhook-configuration.png)
+
+Jenkins job configuration
+
+![](/task4/extra/images/jenkins_build-configuration_git.png)
+![](/task4/extra/images/jenkins_build-configuration_triggers.png)
+![](/task4/extra/images/jenkins_build-configuration_post-build-actions.png)
+
+### Success build scenario
+
+![](/task4/extra/images/jenkins_success-job.png)
+![](/task4/extra/images/github_success-jenkins-job.png)
+
+### Failed build scenario
+
+![](/task4/extra/images/jenkins_failed-job.png)
+![](/task4/extra/images/github_failed-jenkins-job.png)
 
 ## Jenkins with local and remote agents
 
