@@ -1,0 +1,19 @@
+task5:
+  name: postgres
+  replicaCount: 1
+  service:
+    port: 5432
+    targetPort: 5432
+    type: ClusterIP
+  container:
+    name: postgres-db
+    image: postgres:13.13
+    port: 5432
+    volumeMounts:
+      - name: "postgres-storage"
+        mountPath: "/var/lib/postgresql/data"
+  volumes:
+    - name: "postgres-storage"
+      hostPath:
+        type: DirectoryOrCreate
+        path: "/Users/skoval/4work/soft/postgres-data"

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.task5.name }}-config
+data:
+  {{- range .Values.task5.config.data }}
+    {{ .key }}: "{{ .value }}"
+  {{- end }}

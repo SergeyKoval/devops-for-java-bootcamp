@@ -1,0 +1,30 @@
+task5:
+  container:
+    env:
+      - name: POSTGRES_DB
+        valueFrom:
+          configMapKeyRef:
+            name: postgres-config
+            key: postgres-db
+      - name: POSTGRES_USER
+        valueFrom:
+          secretKeyRef:
+            name: postgres-secret
+            key: postgres-user
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: postgres-secret
+            key: postgres-password
+  config:
+    data:
+      - key: postgres-url
+        value: postgres-service
+      - key: postgres-db
+        value: task3
+  secret:
+    data:
+      - key: postgres-user
+        value: cG9zdGdyZXM=
+      - key: postgres-password
+        value: cGFzc3dvcmQ=

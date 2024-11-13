@@ -1,0 +1,23 @@
+repositories:
+  - name: stable
+    url: https://charts.bitnami.com/bitnami
+
+releases:
+  - name: postgres
+    chart: ./charts/postgres
+    values:
+      - ./values/task5-postgres.yaml
+
+  - name: task3
+    chart: ./charts/task3
+    values:
+      - ./values/task5-task3.yaml
+
+  - name: nginxdemos-hello
+    chart: ./charts/task3
+    values:
+      - ./values/task5-nginxdemos-hello.yaml
+
+  - name: nginx
+    chart: bitnami/nginx
+    version: 18.2.5

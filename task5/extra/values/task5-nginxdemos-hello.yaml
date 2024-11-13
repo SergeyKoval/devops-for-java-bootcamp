@@ -1,0 +1,11 @@
+task5:
+  replicaCount: 5
+  name: nginxdemos-hello
+  service:
+    port: 80
+    targetPort: 80
+    type: ClusterIP
+  container:
+    name: nginxdemos-hello
+    image: nginxdemos/hello:latest
+    port: 80

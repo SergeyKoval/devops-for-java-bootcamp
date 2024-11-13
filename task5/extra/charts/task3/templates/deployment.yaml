@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.task5.name }}-deployment
+  labels:
+    app: {{ .Values.task5.name }}
+spec:
+  replicas: {{ .Values.task5.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.task5.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.task5.name }}
+    spec:
+      containers:
+        - name: {{ .Values.task5.container.name }}
+          image: {{ .Values.task5.container.image }}
+          ports:
+            - containerPort: {{ .Values.task5.container.port }}
+          {{- with .Values.task5.container.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

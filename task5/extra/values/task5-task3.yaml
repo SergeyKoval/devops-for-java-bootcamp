@@ -1,0 +1,35 @@
+task5:
+  replicaCount: 1
+  name: task3
+  service:
+    port: 8080
+    targetPort: 8080
+    nodePort: 30111
+    type: NodePort
+  container:
+    name: task3-java-app
+    image: deplake/devops-for-java-bootcamp-task3-extra:latest
+    port: 8080
+    env:
+      - name: SPRING_DATASOURCE_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: postgres-secret
+            key: postgres-user
+      - name: SPRING_DATASOURCE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: postgres-secret
+            key: postgres-password
+      - name: POSTGRES_URL
+        valueFrom:
+          configMapKeyRef:
+            name: postgres-config
+            key: postgres-url
+      - name: POSTGRES_DB
+        valueFrom:
+          configMapKeyRef:
+            name: postgres-config
+            key: postgres-db
+      - name: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://${POSTGRES_URL}:5432/${POSTGRES_DB}
